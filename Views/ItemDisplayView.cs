@@ -117,7 +117,7 @@ namespace MaliMissionRoller2
                 itemView.MultiListView.SetGridIconSpacing(new Vector2(6000, 6000));
                 itemView.MultiListView.SetGridIconSize(3);
                 itemView.MultiListView.SetLayoutMode(0);
-                itemView.MultiListView.SetViewCellCounts(Vector2.Zero, Vector2.Zero);
+                itemView.MultiListView.SetViewCellCounts(IPoint.Zero, IPoint.Zero);
                 preview.AddChild(itemView.MultiListView, false);
                 _browserEntryViews.Add(itemView);
             }
@@ -152,7 +152,7 @@ namespace MaliMissionRoller2
             rollEntry.MultiListView.SetGridIconSpacing(new Vector2(6000, 6000));
             rollEntry.MultiListView.SetGridIconSize(3);
             rollEntry.MultiListView.SetLayoutMode(0);
-            rollEntry.MultiListView.SetViewCellCounts(Vector2.Zero, Vector2.Zero);
+            rollEntry.MultiListView.SetViewCellCounts(IPoint.Zero, IPoint.Zero);
 
             if (DummyItem.CreateDummyItemID(rollEntryModel.LowId, rollEntryModel.HighId, rollEntryModel.Ql, out Identity dummyItemId))
             {
