@@ -68,12 +68,18 @@ namespace MaliMissionRoller2
 
         private void Game_OnTeleportStarted(object sender, EventArgs e)
         {
+            if (!Window.Window.IsValid)
+                return;
+
             MainWindow.CurrentTerminal = null;
             Window.MissionView.Hide();
         }
 
         private void Game_OnTeleportEnded(object sender, EventArgs e)
         {
+            if (!Window.Window.IsValid)
+                return;
+
             Window.SettingsView.Locations.BoundsCheck();
         }
 
@@ -86,6 +92,9 @@ namespace MaliMissionRoller2
             if (((GenericCmdMessage)n3Msg).Target.Type != IdentityType.MissionTerminal)
                 return;
 
+            if (!Window.Window.IsValid)
+                return;
+
             MainWindow.CurrentTerminal = new MissionTerminal(DynelManager.GetDynel(((GenericCmdMessage)n3Msg).Target));
             Window.MissionView.ShopValue = Math.Round(Settings.Dev["ShopValue"] * (1 + (float)DynelManager.LocalPlayer.GetStat(AOSharp.Common.GameData.Stat.ComputerLiteracy) / (40 * 100)) / 100, 3);
             Window.SwapViews();
@@ -93,11 +102,17 @@ namespace MaliMissionRoller2
 
         private void RollListChanged(object sender, RollListChangedArgs rollListChanged)
         {
+            if (!Window.Window.IsValid)
+                return;
+
             Window.RollMatchCheck(rollListChanged.MissionDetails);
         }
 
         private void Update(object sender, float e)
         {
+            if (!Window.Window.IsValid)
+                return;
+
             Window.Update(e);
         }
 
