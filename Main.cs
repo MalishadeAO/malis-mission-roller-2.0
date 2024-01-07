@@ -33,7 +33,7 @@ namespace MaliMissionRoller2
            
             Game.OnUpdate += Update;
             Mission.RollListChanged += RollListChanged;
-            Network.N3MessageSent += N3Message_Sent;
+            Network.N3MessageReceived += N3Message_Received;
             Game.TeleportEnded += Game_OnTeleportEnded;
             Game.TeleportStarted += Game_OnTeleportStarted;
 
@@ -83,19 +83,35 @@ namespace MaliMissionRoller2
             Window.SettingsView.Locations.BoundsCheck();
         }
 
-        private void N3Message_Sent(object sender, N3Message n3Msg)
+        private void N3Message_Received(object sender, N3Message n3Msg)
         {
-            if (n3Msg.Identity != DynelManager.LocalPlayer.Identity && 
-                n3Msg.N3MessageType != N3MessageType.GenericCmd)
+            if (!(n3Msg is GenericCmdMessage genCmdMsg))
                 return;
 
-            if (((GenericCmdMessage)n3Msg).Target.Type != IdentityType.MissionTerminal)
+            if (n3Msg.Identity != DynelManager.LocalPlayer.Identity)
+                return;
+
+            if (genCmdMsg.Action != GenericCmdAction.Use)
+                return;
+
+            if (genCmdMsg.Target.Type != IdentityType.MissionTerminal)
                 return;
 
             if (!Window.Window.IsValid)
+            {
+                Chat.WriteLine("This shouldn't happen");
                 return;
+            }
 
-            MainWindow.CurrentTerminal = new MissionTerminal(DynelManager.GetDynel(((GenericCmdMessage)n3Msg).Target));
+            var terminal = DynelManager.GetDynel(genCmdMsg.Target);
+
+            if (terminal == null)
+            {
+                Chat.WriteLine("This shouldn't happen");
+                return;
+            }
+
+            MainWindow.CurrentTerminal = new MissionTerminal(terminal);
             Window.MissionView.ShopValue = Math.Round(Settings.Dev["ShopValue"] * (1 + (float)DynelManager.LocalPlayer.GetStat(AOSharp.Common.GameData.Stat.ComputerLiteracy) / (40 * 100)) / 100, 3);
             Window.SwapViews();
         }

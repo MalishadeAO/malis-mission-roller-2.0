@@ -150,11 +150,12 @@ namespace MaliMissionRoller2
             Vector3 terminalPos = MainWindow.CurrentTerminal.Position;
             Vector3 playerPos = DynelManager.LocalPlayer.Position;
 
-            if (Vector3.Distance(playerPos, terminalPos) < _maxDistanceToTerminal)
-                return;
-
-            MainWindow.CurrentTerminal = null;
-            Hide();
+            if (Vector3.Distance(playerPos, terminalPos) > _maxDistanceToTerminal)
+            {
+                Chat.WriteLine("Current terminal set to None (outside of reach)", ChatColor.Red);
+                MainWindow.CurrentTerminal = null;
+                Hide();
+            }
         }
 
         private void MissionViewSetAlpha(float num)

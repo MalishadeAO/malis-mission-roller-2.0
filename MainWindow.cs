@@ -196,7 +196,7 @@ namespace MaliMissionRoller2
 
             MissionSliders sliders = SettingsView.Sliders.GetSliderValues();
 
-            CurrentTerminal.RequestMissions(
+            CurrentTerminal?.RequestMissions(
                 sliders.Difficulty,
                 sliders.GoodBad,
                 sliders.OrderChaos,
