@@ -141,7 +141,7 @@ namespace MaliMissionRoller2
             rollEntry.Root.FindChild("Minus", out rollEntry.Minus);
             Extensions.ButtonSetGfx(rollEntry.Minus, 1000047);
             rollEntry.Root.FindChild("Preview", out View preview);
-            rollEntry.Name.Text = rollEntryModel.Name.Length > 21 ? rollEntryModel.Name.Substring(0, 21) : rollEntryModel.Name;
+            rollEntry.Name.Text = rollEntryModel.Name;
             rollEntry.Bitmap.SetBitmap("ItemPreviewBg2");
             rollEntry.Range.Text = $"{rollEntryModel.Ql.ToString().PadLeft(3, '0')}";
             rollEntry.Plus.Tag = rollEntry;
@@ -307,7 +307,7 @@ namespace MaliMissionRoller2
         //browser mode stuff
         private void FormatBrowserEntry(BrowserEntryView browserEntry, KeyValuePair<ItemInfo, List<Stat>> itemDb)
         {
-            browserEntry.Name.Text = itemDb.Key.Name.Length > 23 ? itemDb.Key.Name.Substring(0, 23) : itemDb.Key.Name;
+            browserEntry.Name.Text = itemDb.Key.Name;
             browserEntry.Range.Text = $"{itemDb.Key.LowQl.ToString().PadLeft(3, '0')} \n{itemDb.Key.HighQl.ToString().PadLeft(3, '0')}";
             browserEntry.Button.Tag = new BrowserEntryViewModel { ItemDb = itemDb, Ql = browserEntry.Ql };
             browserEntry.Button.Clicked = BrowserEntryClick;
