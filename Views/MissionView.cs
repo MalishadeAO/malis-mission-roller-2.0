@@ -125,7 +125,11 @@ namespace MaliMissionRoller2
                 {
                     if (DummyItem.CreateDummyItemID(itemData[e].LowId, itemData[e].HighId, itemData[e].Ql, out Identity dummyItemId))
                     {
-                        CombinedItemValue[i] += (int)(ShopValue * Extensions.GetItemValue(dummyItemId));
+                        if (itemData[e].LowId == 84160 || itemData[e].HighId == 84159) //Cloaking Device ignore
+                            CombinedItemValue[i] += 0;
+                        else
+                            CombinedItemValue[i] += (int)(ShopValue * Extensions.GetItemValue(dummyItemId));
+
                         if (_missionViews[i].MultiListViewItem[e] != null)
                             _missionViews[i].MultiListView.RemoveItem(_missionViews[i].MultiListViewItem[e]);
 
