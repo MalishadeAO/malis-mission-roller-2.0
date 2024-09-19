@@ -26,11 +26,18 @@ namespace MaliMissionRoller2
             string fileName = File.Exists($"{pluginDir}\\JSON\\Settings.json") ? "" : "Default_";
             Settings = JsonConvert.DeserializeObject<Settings>(File.ReadAllText($"{pluginDir}\\JSON\\{fileName}Settings.json"));
             Extensions.FormatItemDb(Settings.Database["Implants"], Settings.Database["Clusters"], Settings.Database["Nanos"], Settings.Database["Rest"]);
-            
+
             Window = new MainWindow("MaliMissionRoller", $"{pluginDir}\\UI\\Windows\\MainWindow.xml");
             Window.Show();
-            Window.Window.MoveTo(Settings.Frame.X, Settings.Frame.Y);
-           
+
+            var screenSize = AOSharp.Core.UI.Window.GetScreenSize();
+
+            if (Settings.Frame.X > screenSize.X || Settings.Frame.Y > screenSize.Y)
+                Window.Window.MoveToCenter();
+            else
+                Window.Window.MoveTo(Settings.Frame.X, Settings.Frame.Y);
+
+            Chat.WriteLine(screenSize);
             Game.OnUpdate += Update;
             Mission.RollListChanged += RollListChanged;
             Network.N3MessageReceived += N3Message_Received;
