@@ -632,25 +632,6 @@
   },
   {
     "Key": {
-      "LowId": 43778,
-      "HighId": 43778,
-      "LowQl": 76,
-      "HighQl": 76,
-      "Tags": [
-        "nano",
-        "crystal",
-        "(summon",
-        "wrath",
-        "incarnation)"
-      ],
-      "Name": "Nano Crystal (Summon Wrath Incarnation)"
-    },
-    "Value": [
-      1015
-    ]
-  },
-  {
-    "Key": {
       "LowId": 85274,
       "HighId": 85274,
       "LowQl": 33,
@@ -41140,6 +41121,25 @@
   },
   {
     "Key": {
+      "LowId": 43330,
+      "HighId": 43330,
+      "LowQl": 1,
+      "HighQl": 1,
+      "Tags": [
+        "nano",
+        "crystal",
+        "(summon",
+        "anger",
+        "manifestation)"
+      ],
+      "Name": "Nano Crystal (Summon Anger Manifestation)"
+    },
+    "Value": [
+      1015
+    ]
+  },
+  {
+    "Key": {
       "LowId": 29415,
       "HighId": 29415,
       "LowQl": 189,
@@ -41213,6 +41213,44 @@
   },
   {
     "Key": {
+      "LowId": 43779,
+      "HighId": 43779,
+      "LowQl": 113,
+      "HighQl": 113,
+      "Tags": [
+        "nano",
+        "crystal",
+        "(summon",
+        "frenzy",
+        "embodiment)"
+      ],
+      "Name": "Nano Crystal (Summon Frenzy Embodiment)"
+    },
+    "Value": [
+      1015
+    ]
+  },
+  {
+    "Key": {
+      "LowId": 43780,
+      "HighId": 43780,
+      "LowQl": 14,
+      "HighQl": 14,
+      "Tags": [
+        "nano",
+        "crystal",
+        "(summon",
+        "fury",
+        "externalization)"
+      ],
+      "Name": "Nano Crystal (Summon Fury Externalization)"
+    },
+    "Value": [
+      1015
+    ]
+  },
+  {
+    "Key": {
       "LowId": 29416,
       "HighId": 29416,
       "LowQl": 179,
@@ -41224,6 +41262,44 @@
         "lemur)"
       ],
       "Name": "Nano Crystal (Summon Lemur)"
+    },
+    "Value": [
+      1015
+    ]
+  },
+  {
+    "Key": {
+      "LowId": 43777,
+      "HighId": 43777,
+      "LowQl": 37,
+      "HighQl": 37,
+      "Tags": [
+        "nano",
+        "crystal",
+        "(summon",
+        "rage",
+        "materialization)"
+      ],
+      "Name": "Nano Crystal (Summon Rage Materialization)"
+    },
+    "Value": [
+      1015
+    ]
+  },
+  {
+    "Key": {
+      "LowId": 43778,
+      "HighId": 43778,
+      "LowQl": 76,
+      "HighQl": 76,
+      "Tags": [
+        "nano",
+        "crystal",
+        "(summon",
+        "wrath",
+        "incarnation)"
+      ],
+      "Name": "Nano Crystal (Summon Wrath Incarnation)"
     },
     "Value": [
       1015

@@ -37,7 +37,6 @@ namespace MaliMissionRoller2
             else
                 Window.Window.MoveTo(Settings.Frame.X, Settings.Frame.Y);
 
-            Chat.WriteLine(screenSize);
             Game.OnUpdate += Update;
             Mission.RollListChanged += RollListChanged;
             Network.N3MessageReceived += N3Message_Received;
