@@ -489,7 +489,7 @@ namespace MaliMissionRoller2
 
             e.Tag = !(bool)e.Tag;
 
-            Extensions.FormatItemDb((bool)Clusters.Tag, (bool)Implants.Tag, (bool)Nanos.Tag, (bool)Rest.Tag, true);
+            Extensions.FormatItemDb((bool)Implants.Tag, (bool)Refined.Tag, (bool)Clusters.Tag, (bool)Nanos.Tag,(bool)Rest.Tag, true);
 
             _cachedSearchText = "";
         }
