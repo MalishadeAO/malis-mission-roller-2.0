@@ -29,6 +29,7 @@
   },
   "Database": {
     "Implants": true,
+    "Refined": true,
     "Clusters": true,
     "Nanos": true,
     "Rest": true

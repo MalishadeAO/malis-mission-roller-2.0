@@ -21,6 +21,7 @@ namespace MaliMissionRoller2
         private Button BrowserMode;
         private Button RollMode;
         public Button Implants;
+        public Button Refined;
         public Button Clusters;
         public Button Nanos;
         public Button Rest;
@@ -46,6 +47,9 @@ namespace MaliMissionRoller2
             _view.FindChild("Implants", out Implants);
             Implants.Tag = Main.Settings.Database["Implants"];
             DbUpdate(Implants);
+            _view.FindChild("Refined", out Refined);
+            Refined.Tag = Main.Settings.Database["Refined"];
+            DbUpdate(Refined);
             _view.FindChild("Clusters", out Clusters);
             Clusters.Tag = Main.Settings.Database["Clusters"];
             DbUpdate(Clusters);
@@ -248,17 +252,30 @@ namespace MaliMissionRoller2
             foreach (var itemDb in Main.ItemDb)
             {
                 int counter = 0;
-
+                int itemId = 0;
                 //item name query
-                foreach (string _searchText in itemName)
+                foreach (string searchText in itemName)
+                {
                     foreach (string keywords in itemDb.Key.Tags)
-                        if (keywords.Contains(_searchText))
+                    {
+                        if (keywords.Contains(searchText))
                         {
                             counter++;
                             break;
                         }
+                    }
 
-                if (itemName.Count() != counter)
+                    if (itemName.Count == 1)
+                    {
+                        if (int.TryParse(itemName[0], out int id))
+                        {
+                            if (id == itemDb.Key.LowId || id == itemDb.Key.HighId)
+                                itemId = id;
+                        }
+                    }
+                }
+
+                if (itemName.Count() != counter && itemId == 0)
                     continue;
 
                 //item mods query

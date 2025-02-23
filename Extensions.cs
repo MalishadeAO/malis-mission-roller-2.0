@@ -62,13 +62,16 @@ namespace MaliMissionRoller2
             return Utils.UnsafePointerToString((*(MemStruct*)pItem).Name);
         }
 
-        public static void FormatItemDb(bool clusters, bool implants, bool nanos, bool rest,bool showItemCount = false)
+        public static void FormatItemDb(bool implants, bool refined, bool clusters, bool nanos, bool rest, bool showItemCount = false)
         {
             Main.ItemDb = new List<KeyValuePair<ItemInfo, List<Stat>>>();
 
             if (clusters)
                 Main.ItemDb.AddRange(JsonConvert.DeserializeObject<List<KeyValuePair<ItemInfo, List<Stat>>>>(
                     File.ReadAllText($"{Main.PluginDir}\\JSON\\ItemDb_Clusters.json")));
+            if (refined)
+                Main.ItemDb.AddRange(JsonConvert.DeserializeObject<List<KeyValuePair<ItemInfo, List<Stat>>>>(
+                    File.ReadAllText($"{Main.PluginDir}\\JSON\\ItemDb_Refined.json")));
             if (implants)
                 Main.ItemDb.AddRange(JsonConvert.DeserializeObject<List<KeyValuePair<ItemInfo, List<Stat>>>>(
                     File.ReadAllText($"{Main.PluginDir}\\JSON\\ItemDb_Implants.json")));
@@ -80,7 +83,6 @@ namespace MaliMissionRoller2
                     File.ReadAllText($"{Main.PluginDir}\\JSON\\ItemDb_Rest.json")));
 
             Main.ItemDb = Main.ItemDb.OrderBy(x => x.Key.Name).ToList();
-            
             if (showItemCount)
                 Chat.WriteLine($"Items loaded: {Main.ItemDb.Count}");
         }

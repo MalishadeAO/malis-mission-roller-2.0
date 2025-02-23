@@ -63,6 +63,7 @@ namespace MaliMissionRoller2
 
 
             Database["Implants"] = (bool)Main.Window.SettingsView.ItemDisplay.Implants.Tag;
+            Database["Refined"] = (bool)Main.Window.SettingsView.ItemDisplay.Refined.Tag;
             Database["Clusters"] = (bool)Main.Window.SettingsView.ItemDisplay.Clusters.Tag;
             Database["Nanos"] = (bool)Main.Window.SettingsView.ItemDisplay.Nanos.Tag;
             Database["Rest"] = (bool)Main.Window.SettingsView.ItemDisplay.Rest.Tag;

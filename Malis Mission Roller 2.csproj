@@ -70,6 +70,9 @@
     <None Include="JSON\ItemDb_Nanos.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="JSON\ItemDb_Refined.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="JSON\ModTags.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
