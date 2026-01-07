@@ -143,7 +143,7 @@ namespace MaliMissionRoller2
                 _isRolling = false;
                 return;
             }
-
+             
             List<RollEntryView> rollEntries = SettingsView.ItemDisplay.RollEntryViews;
 
             if (rollEntries.Count == 0 && _isRolling)
