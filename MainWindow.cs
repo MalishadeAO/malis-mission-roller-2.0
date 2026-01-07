@@ -156,41 +156,28 @@ namespace MaliMissionRoller2
 
             if ((bool)SettingsView.ExtraOptions.AutoAdjustQl.Tag && _isRolling)
             {
+                var rollProcessor = new RollEntryProcessor(MissionLvls);
 
-                var rollEntry = SettingsView.ItemDisplay.RollEntryViews
-                    .FirstOrDefault(entry => MissionLvls[DynelManager.LocalPlayer.Level - 1]
-                    .Any(missionRange => entry.RollEntryModel.Ql - missionRange == 0 || 
-                    new[] { "Nano Crystal", "NanoCrystal" }.Any(entry.RollEntryModel.Name.Contains) && Math.Abs(entry.RollEntryModel.Ql - missionRange) <= 10) ||
-                    entry.RollEntryModel.LowId == 297315);
+                var result = rollProcessor.ProcessRollEntry(SettingsView.ItemDisplay.RollEntryViews);
 
-                if (rollEntry == null)
+                if (result.NoValidEntry)
                 {
                     Midi.Play("Alert");
-
-                    Chat.WriteLine("Remaining roll items outside characters level reach.\n" +
+                    Chat.WriteLine(
+                        "Remaining roll items outside characters level reach.\n" +
                         "If you think this is wrong, disable the 'Auto Adjust Level Slider'\n" +
                         "temporarily and contact me so I can update the mission level table!\n" +
                         "(press '?' in the top right corner for contact details)");
-
                     _isRolling = false;
-                    return;
                 }
-
-                if (rollEntry.RollEntryModel.LowId != 297315)
+                else if (result.IsSpecialCredit)
                 {
-                    _missionLevel = MissionLvls[DynelManager.LocalPlayer.Level - 1].OrderBy(x => Math.Abs(x - rollEntry.RollEntryModel.Ql)).FirstOrDefault();
-                    int count = SettingsView.ItemDisplay.RollEntryViews
-                        .Count(y => Math.Abs(_missionLevel - y.RollEntryModel.Ql) <= 10 && new[] { "Nano Crystal", "NanoCrystal" }
-                        .Any(y.RollEntryModel.Name.Contains) ||
-                        _missionLevel - y.RollEntryModel.Ql == 0);
-
-                    SettingsView.Sliders.EasyHard.Value = MissionLvls[DynelManager.LocalPlayer.Level - 1].IndexOf(_missionLevel) + 1;
-
-                    Chat.WriteLine($"Mission level set to: {_missionLevel}\n Unique items to roll in this range: {count}");
+                    Chat.WriteLine($"Rolling for missions with combined credit reward >= {result.CreditReward}");
                 }
                 else
                 {
-                    Chat.WriteLine($"Rolling for missions with combined credit reward >= {rollEntry.RollEntryModel.Ql}");
+                    SettingsView.Sliders.EasyHard.Value = result.SliderValue;
+                    Chat.WriteLine($"Mission level set to: {result.MissionLevel}\nUnique items to roll in this range: {result.UniqueItemCount}");
                 }
             }
 

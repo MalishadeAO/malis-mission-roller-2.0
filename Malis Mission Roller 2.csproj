@@ -45,6 +45,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RollEntryProcessor.cs" />
     <Compile Include="Stat.cs" />
     <Compile Include="Midi.cs" />
     <Compile Include="Settings.cs" />
