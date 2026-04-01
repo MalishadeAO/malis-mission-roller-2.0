@@ -26,7 +26,7 @@ jobs:
       - name: Package release DLL
         run: |
           mkdir -p Release
-          Compress-Archive -Path "bin/Release/Malis Mission Roller 2.dll" -DestinationPath "Release/MissionRoller-${{ github.ref_name }}.zip"
+          Compress-Archive -Path "bin/Release/*" -DestinationPath "Release/MissionRoller-${{ github.ref_name }}.zip"
       - name: Publish Release
         uses: softprops/action-gh-release@v2
         with:
