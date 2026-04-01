@@ -14,9 +14,9 @@ jobs:
     steps:
       # 1️⃣ Checkout repo
       - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
-          submodules: recursive
+          path: '.'  # clone directly into the workspace root
 
       # 2️⃣ Setup MSBuild
       - name: Setup MSBuild
