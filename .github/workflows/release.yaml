@@ -1,46 +1,32 @@
 name: Release
-
 on:
   push:
     tags:
-      - 'v*'  # triggers only on version tags like v1.0.0
-
+      - 'v*'
 jobs:
   build-and-release:
     runs-on: windows-latest
     permissions:
       contents: write
-
     steps:
-      # 1️⃣ Checkout repo
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          path: '.'  # clone directly into the workspace root
-
-      # 2️⃣ Setup MSBuild
+          path: '.'
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
-
-      # 3️⃣ Restore NuGet packages
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v2
       - name: Restore NuGet
-        run: dotnet restore "Malis Mission Roller 2.sln"
-
-      # 4️⃣ Build solution in Release mode
+        run: nuget restore "Malis Mission Roller 2.sln"
       - name: Build
         run: msbuild "Malis Mission Roller 2.sln" /p:Configuration=Release
-
-      # 5️⃣ Write version file for plugin updater
       - name: Write version file
         run: echo ${{ github.ref_name }} > "bin/Release/MissionRoller.version"
-
-      # 6️⃣ Package only the plugin DLL for release
       - name: Package release DLL
         run: |
           mkdir -p Release
           Compress-Archive -Path "bin/Release/Malis Mission Roller 2.dll" -DestinationPath "Release/MissionRoller-${{ github.ref_name }}.zip"
-
-      # 7️⃣ Publish GitHub release
       - name: Publish Release
         uses: softprops/action-gh-release@v2
         with:
